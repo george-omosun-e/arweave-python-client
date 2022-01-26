@@ -82,7 +82,7 @@ class Wallet(object):
         pass
 
     def get_last_transaction_id(self):
-        url = "{}/tx_anchor".format(self.api_url)
+        url = "{}/wallet/{}/last_tx".format(self.api_url, self.address)
 
         response = requests.get(url)
 
@@ -328,6 +328,7 @@ class Transaction(object):
 
         if response.status_code == 200:
             self.load_json(response.text)
+            tx = response.text
         else:
             logger.error(response.text)
 
